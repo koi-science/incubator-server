@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var incubatorSchema = mongoose.Schema({
+const incubatorSchema = mongoose.Schema({
     deviceId: {
         type: Number,
         required: true
@@ -19,6 +19,6 @@ var incubatorSchema = mongoose.Schema({
     }
 });
 
-var Incubator = mongoose.model('Incubator', incubatorSchema);
+const Incubator = mongoose.model('Incubator', incubatorSchema);
 
 module.exports = Incubator;

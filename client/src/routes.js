@@ -1,9 +1,14 @@
 import React from 'react';
-import { Route } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
+import App from './components/App';
 import DeviceListPage from './components/DeviceListPage';
+import DevicePage from './components/DevicePage';
 
 export default (
-    <Route path="/" component={DeviceListPage}></Route>
+    <Route path="/" component={App}>
+        <IndexRoute component={DeviceListPage}/>
+        <Route path="device" component={DevicePage}/>
+    </Route>
 )
 

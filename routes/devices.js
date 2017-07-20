@@ -1,9 +1,12 @@
 const express = require('express'),
-      router = express.Router();
+      router = express.Router(),
+      Incubator = require('../models/incubator');
 
 
 router.get('/devices', (req, res) => {
-    res.send("devices route works");
+    Incubator.find().distinct('deviceId', function(error, deviceId) {
+        res.send(deviceId);
+    });
 });
 
 module.exports = router;
