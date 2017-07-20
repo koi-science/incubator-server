@@ -30,11 +30,6 @@ client/node_modules
 # Production
 client/build
 
-# Temp
-client
-
-
-
 # Debug log from npm
 npm-debug.log
 
