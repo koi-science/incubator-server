@@ -5,27 +5,22 @@ import random
 import time
 
 
+datasets = [('1234', 10), ('5678', 20), ('9012', 30)]
 
-
-temps = [10, 20, 30]
 
 while True:
-	for t in temps:
-		n = 20
-		while n > 0:
-			data={
-				'id' : '1234',
-				'curr_temp' : t + random.randint(-10, 10),
-				'set_temp' : t
-			}
-			try:
-				r = requests.post("http://dev.koi.science:3000/temperature/", data)
-			except requests.exceptions.ConnectionError:
-				print("OOps!")
+	for d in datasets:
+		data = {
+			'id' : d[0],
+			'curr_temp' : d[1] + random.randint(-10, 10),
+			'set_temp' : d[1],
+		}
+
+		try:
+			r = requests.post("http://dev.koi.science:4000/temperature/", data)
 			print(r.status_code, r.reason)
-			n -= 1
+		except requests.exceptions.ConnectionError:
+			print("OOps!")
 
-			time.sleep(2)
-
-
+		time.sleep(2)
 
