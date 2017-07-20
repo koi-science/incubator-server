@@ -1,11 +1,11 @@
-var express = require('express'),
+const express = require('express'),
     router = express.Router(),
     Incubator = require('../models/incubator');
 
     require('../createDB');
 
 router.post('/', function(req, res, next) {
-    var incubatorStatus = new Incubator({
+    let incubatorStatus = new Incubator({
         deviceId: req.body.id,
         currentTemperature: req.body.curr_temp,
         setTemperature: req.body.curr_temp,

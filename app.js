@@ -6,11 +6,15 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var temperature = require('./routes/temperature');
+var devices = require('./routes/devices');
+
 
 var app = express();
 
 require('./createDB');
 
+// set static path /
+app.use(express.static(path.join(__dirname, 'client/build/')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -19,7 +23,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', index);
+app.use('/', devices);
 app.use('/temperature', temperature);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
