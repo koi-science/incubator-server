@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactHighcharts from 'react-highcharts';
 
 
 export default class DevicePage extends React.Component {
@@ -22,8 +23,71 @@ export default class DevicePage extends React.Component {
 	}
 
 	render() {
+        let  currentTemperatureList = [];
+        let  setTemperatureList = [];
 
-         const temperatureList = this.state.temperatureList.map((temperatureEntry, id) =>
+        this.state.temperatureList.forEach((element) => {
+            currentTemperatureList.push([element.timeStamp, element.currentTemperature]);
+            setTemperatureList.push([element.timeStamp, element.setTemperature]);
+
+        });
+
+        console.log("Lists length", setTemperatureList.length);
+
+        const config = {
+            title: {
+                text: `Incubator # ${this.props.params.deviceId}`
+            },
+
+            subtitle: {
+                text: 'Temperature Chart'
+            },
+
+            yAxis: {
+                title: {
+                    text: 'Temperature in Celsius'
+                },
+                min: 0
+            },
+
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    month: '%e. %b',
+                    year: '%b'
+                }
+            },
+
+            tooltip: {
+                headerFormat: '<b>{point.x:%e %b}</b><br>',
+                pointFormat: '{point.y:.2f} C'
+            },
+
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+
+            series: [{
+                name: 'Current temperature',
+                data: currentTemperatureList
+            }, {
+                name: 'Set temperature',
+                data: setTemperatureList
+            }]
+
+        };
+
+        const temperatureList = this.state.temperatureList.map((temperatureEntry, id) =>
 			<li key={id}>
 				Current temperature: {temperatureEntry.currentTemperature}.
 				Set temperature: {temperatureEntry.setTemperature}
@@ -32,12 +96,14 @@ export default class DevicePage extends React.Component {
 		console.log("temperature", this.state.temperatureList);
 		return (
 			<div>
-                <h2>
-                    Device  #{this.props.params.deviceId} Page
-                </h2>
-				<ul>
-					{temperatureList}
-				</ul>
+                {/*<h2>*/}
+                    {/*Device  #{this.props.params.deviceId} Page*/}
+                {/*</h2>*/}
+				{/*<ul>*/}
+					{/*{temperatureList}*/}
+				{/*</ul>*/}
+
+                <ReactHighcharts config={config}/>
             </div>
 		);
 	}

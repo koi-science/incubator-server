@@ -8,7 +8,7 @@ router.post('/', function(req, res, next) {
     let incubatorStatus = new Incubator({
         deviceId: req.body.id,
         currentTemperature: req.body.curr_temp,
-        setTemperature: req.body.curr_temp,
+        setTemperature: req.body.set_temp,
         timeStamp: new Date()
     });
 
