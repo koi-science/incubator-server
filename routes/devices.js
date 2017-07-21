@@ -9,4 +9,11 @@ router.get('/devices', (req, res) => {
     });
 });
 
+router.get('/device/:deviceId', (req, res) => {
+    Incubator.find({deviceId: req.params.deviceId}, function(error, data) {
+        res.send(data);
+    });
+
+});
+
 module.exports = router;

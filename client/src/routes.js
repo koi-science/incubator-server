@@ -8,7 +8,7 @@ import DevicePage from './components/DevicePage';
 export default (
     <Route path="/" component={App}>
         <IndexRoute component={DeviceListPage}/>
-        <Route path="device" component={DevicePage}/>
+        <Route path="device/:deviceId" component={DevicePage}/>
     </Route>
 )
 

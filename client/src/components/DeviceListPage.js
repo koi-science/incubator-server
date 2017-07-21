@@ -16,7 +16,6 @@ export default class DeviceListPage extends React.Component {
     componentWillMount() {
         axios.get('/devices')
             .then((response) => {
-            	console.log(response.data);
                 this.setState({deviceList: response.data});
             })
             .catch((error) => {
@@ -26,9 +25,9 @@ export default class DeviceListPage extends React.Component {
 
 	render() {
 
-		const incubatorList = this.state.deviceList.map((element, id) =>
+		const incubatorList = this.state.deviceList.map((userId, id) =>
 			<li key={id}>
-				<Link to="/device">Incubator id #{ element }</Link>
+				<Link to={`/device/${userId}`}>Incubator id #{ userId }</Link>
 			</li>
 		);
 
