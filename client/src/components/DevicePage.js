@@ -13,7 +13,7 @@ export default class DevicePage extends React.Component {
     }
 
 	componentWillMount() {
-        axios.get(`/device/${this.props.params.deviceId}`)
+        axios.get(`/device/${this.props.params.incubatorId}`)
             .then((response) => {
                 this.setState({temperatureList: response.data});
             })

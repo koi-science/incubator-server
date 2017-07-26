@@ -27,7 +27,7 @@ export default class DeviceListPage extends React.Component {
 
 		const incubatorList = this.state.deviceList.map((userId, id) =>
 			<li key={id}>
-				<Link to={`/device/${userId}`}>Incubator id #{ userId }</Link>
+				<Link to={`/incubator/${userId}`}>Incubator id #{ userId }</Link>
 			</li>
 		);
 
