@@ -32,9 +32,15 @@ export default class DevicePage extends React.Component {
 
         });
 
-        console.log("Lists length", setTemperatureList.length);
+        ReactHighcharts.Highcharts.setOptions({
+            global: {
+                // timezoneOffset: +1,
+                useUTC: false
+            }
+        });
 
         const config = {
+
             title: {
                 text: `Incubator # ${this.props.params.deviceId}`
             },
@@ -51,16 +57,17 @@ export default class DevicePage extends React.Component {
             },
 
             xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                    month: '%e. %b',
-                    year: '%b'
-                }
+                tickInterval: 60 * 30 * 1000, // every 30 min
+                labels: {
+                    format: '{value:%b %e, %H:%M:%S}'
+                },
             },
 
             tooltip: {
-                headerFormat: '<b>{point.x:%e %b}</b><br>',
-                pointFormat: '{point.y:.2f} C'
+                headerFormat: '<b>{point.x:%e %b, %H:%M:%S}</b><br>',
+                shared: true,
+                crosshairs: true
+
             },
 
             legend: {
@@ -96,13 +103,6 @@ export default class DevicePage extends React.Component {
 		console.log("temperature", this.state.temperatureList);
 		return (
 			<div>
-                {/*<h2>*/}
-                    {/*Device  #{this.props.params.deviceId} Page*/}
-                {/*</h2>*/}
-				{/*<ul>*/}
-					{/*{temperatureList}*/}
-				{/*</ul>*/}
-
                 <ReactHighcharts config={config}/>
             </div>
 		);

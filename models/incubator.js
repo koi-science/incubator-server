@@ -14,7 +14,7 @@ const incubatorSchema = mongoose.Schema({
         required: true
     },
     timeStamp: {
-        type: Date,
+        type: Number,
         required: true
     }
 });

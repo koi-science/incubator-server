@@ -9,7 +9,7 @@ router.post('/', function(req, res, next) {
         deviceId: req.body.id,
         currentTemperature: req.body.curr_temp,
         setTemperature: req.body.set_temp,
-        timeStamp: new Date()
+        timeStamp: new Date().valueOf()
     });
 
     incubatorStatus.save(function(err, user, affected) {
