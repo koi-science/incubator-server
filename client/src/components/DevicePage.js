@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import ReactHighcharts from 'react-highcharts';
-
+import ReactHighstock from 'react-highcharts/ReactHighstock';
+import highchartsExporting from 'highcharts-exporting';
 
 export default class DevicePage extends React.Component {
     constructor(props) {
@@ -13,7 +14,11 @@ export default class DevicePage extends React.Component {
     }
 
 	componentWillMount() {
-        axios.get(`/device/${this.props.params.incubatorId}`)
+         highchartsExporting(ReactHighcharts.Highcharts);
+         //ReactHighstock(ReactHighcharts.Highcharts);
+        // console.log(this.state.temperatureList);
+
+        axios.get(`/device/${this.props.params.incubatorId}/dayData`)
             .then((response) => {
                 this.setState({temperatureList: response.data});
             })
@@ -23,6 +28,7 @@ export default class DevicePage extends React.Component {
 	}
 
 	render() {
+        console.log(this.state.temperatureList);
         let  currentTemperatureList = [];
         let  setTemperatureList = [];
 
@@ -32,7 +38,7 @@ export default class DevicePage extends React.Component {
 
         });
 
-        ReactHighcharts.Highcharts.setOptions({
+        ReactHighstock.Highcharts.setOptions({
             global: {
                 // timezoneOffset: +1,
                 useUTC: false
@@ -90,20 +96,52 @@ export default class DevicePage extends React.Component {
             }, {
                 name: 'Set temperature',
                 data: setTemperatureList
-            }]
+            }],
 
+            scrollbar: {
+                enabled: false
+            },
+
+            rangeSelector: {
+                selected: 1,
+                allButtonsEnabled: true,
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                }, {
+                    type: 'hour',
+                    count: 2,
+                    text: '2h'
+                }, {
+                    type: 'day',
+                    count: 1,
+                    text: '1d'
+                }, {
+                    type: 'week',
+                    count: 1,
+                    text: '1w'
+                },  {
+                    type: 'year',
+                    count: 1,
+                    text: '1y'
+                }, {
+                    type: 'all',
+                    text: 'All'
+                }]
+            },
+            navigator: {
+                enabled: false
+            },
+            exporting: {
+
+            }
         };
 
-        const temperatureList = this.state.temperatureList.map((temperatureEntry, id) =>
-			<li key={id}>
-				Current temperature: {temperatureEntry.currentTemperature}.
-				Set temperature: {temperatureEntry.setTemperature}
-			</li>
-         );
-		console.log("temperature", this.state.temperatureList);
+
 		return (
 			<div>
-                <ReactHighcharts config={config}/>
+                <ReactHighstock isPureConfig config={config}/>
             </div>
 		);
 	}
