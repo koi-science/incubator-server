@@ -9,6 +9,7 @@
     "body-parser": "~1.17.1",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "generate-key": "0.0.6",
     "mongo": "^0.1.0",
     "mongodb": "^2.2.30",
     "mongoose": "^4.11.3",

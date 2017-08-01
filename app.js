@@ -1,17 +1,17 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
+const express = require('express'),
+    path = require('path'),
+    favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    bodyParser = require('body-parser'),
 
-var index = require('./routes/web/index');
-var temperature = require('./routes/web/temperature');
-var devices = require('./routes/web/devices');
+    index = require('./routes/web/index'),
+    devices = require('./routes/web/devices'),
+    incubator = require('./routes/iot/incubator'),
+    temperature = require('./routes/iot/temperature'),
 
+    app = express();
 
-var app = express();
-
-require('./createDB');
+    require('./createDB');
 
 // set static path /
 app.use(express.static(path.join(__dirname, 'client/build/')));
@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', index);
 app.use('/', devices);
 app.use('/temperature', temperature);
-
+app.use('/incubator', incubator);
 
 
 // catch 404 and forward to error handler

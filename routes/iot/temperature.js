@@ -2,8 +2,6 @@ const express = require('express'),
     router = express.Router(),
     Incubator = require('../../models/incubator');
 
-    require('../../createDB');
-
 router.post('/', function(req, res, next) {
     let incubatorStatus = new Incubator({
         deviceId: req.body.id,
@@ -13,8 +11,7 @@ router.post('/', function(req, res, next) {
     });
 
     incubatorStatus.save(function(err, user, affected) {
-      if (err) throw err;
-      console.log("user", user);
+      if (err) console.log("err", err);
     });
 
     res.sendStatus(200);
