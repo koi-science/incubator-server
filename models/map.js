@@ -8,6 +8,14 @@ const mapSchema = mongoose.Schema({
     deviceKey: {
         type: String,
         required: true
+    },
+    activationCode: {
+        type: String,
+        required: true
+    },
+    timeStamp: {
+        type: Number,
+        required: true
     }
 });
 

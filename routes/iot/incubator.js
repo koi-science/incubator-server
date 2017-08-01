@@ -6,29 +6,60 @@ const express = require('express'),
 
 
 router.post('/', (req, res) => {
-    let deviceId = req.body.id,
-        deviceKey;
+    let deviceId = req.body.id;
 
     Map.findOne({
         deviceId: deviceId
-    }, function(error, data) {
+    }, function(err, data) {
+
+        if (err) {
+            res.send(err);
+            return
+        }
+
+        if(!deviceId) {
+            res.send(404);
+            return;
+        }
         if (data) {
-            deviceKey = data.deviceKey;
+
+            //update entry
+            Map.findOne({deviceId: deviceId }, function (err, map){
+                map.deviceKey = rand.generateKey(10);
+                map.activationCode = rand.generateKey(3);
+                map.timeStamp = new Date().valueOf();
+                map.save(function(err, map, affected) {
+                    if (err) {
+                        res.send(err);
+                    }
+                    res.send({
+                        url: map.activationCode
+                    });
+                });
+            });
+
         } else {
 
-            let key = rand.generateKey(10);
+            //create entry
             let map = new Map({
                 deviceId: deviceId,
-                deviceKey: key
+                deviceKey: rand.generateKey(10),
+                activationCode: rand.generateKey(3),
+                timeStamp: new Date().valueOf()
             });
 
             map.save(function(err, map, affected) {
-                if (err) console.log("err", err);
-                console.log("map", map);
+                if (err) {
+                    res.send(err);
+                }
+
+                res.send({
+                    url: map.activationCode
+                });
             });
         }
+
     });
-    res.sendStatus(200);
 });
 
 module.exports = router;
