@@ -1,7 +1,7 @@
 const express = require('express'),
       router = express.Router(),
-      Incubator = require('../models/incubator'),
-      CONSTANTS = require('../constant/index');
+      Incubator = require('../../models/incubator'),
+      CONSTANTS = require('../../constant/index');
 
 
 router.get('/devices', (req, res) => {

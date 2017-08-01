@@ -4,9 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var temperature = require('./routes/temperature');
-var devices = require('./routes/devices');
+var index = require('./routes/web/index');
+var temperature = require('./routes/web/temperature');
+var devices = require('./routes/web/devices');
 
 
 var app = express();

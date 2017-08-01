@@ -67,6 +67,12 @@ export default class DevicePage extends React.Component {
                 labels: {
                     format: '{value:%b %e, %H:%M:%S}'
                 },
+                events: {
+                    afterSetExtremes: (e) => {
+                        console.log("Extreme set", e);
+                    }
+                },
+                minRange: 3600 * 1000
             },
 
             tooltip: {
@@ -111,8 +117,8 @@ export default class DevicePage extends React.Component {
                     text: '1h'
                 }, {
                     type: 'hour',
-                    count: 2,
-                    text: '2h'
+                    count: 3,
+                    text: '3h'
                 }, {
                     type: 'day',
                     count: 1,
@@ -122,13 +128,15 @@ export default class DevicePage extends React.Component {
                     count: 1,
                     text: '1w'
                 },  {
+                    type: 'month',
+                    count: 1,
+                    text: '1m'
+                },  {
                     type: 'year',
                     count: 1,
                     text: '1y'
-                }, {
-                    type: 'all',
-                    text: 'All'
-                }]
+                }
+                ]
             },
             navigator: {
                 enabled: false

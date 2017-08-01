@@ -1,8 +1,8 @@
 const express = require('express'),
     router = express.Router(),
-    Incubator = require('../models/incubator');
+    Incubator = require('../../models/incubator');
 
-    require('../createDB');
+    require('../../createDB');
 
 router.post('/', function(req, res, next) {
     let incubatorStatus = new Incubator({
