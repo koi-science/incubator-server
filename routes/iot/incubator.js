@@ -1,8 +1,9 @@
 const express = require('express'),
       router = express.Router(),
-      rand = require('generate-key');
+      rand = require('generate-key'),
 
-      Map = require('../../models/map');
+      Map = require('../../models/map'),
+      registerURL = 'http://dev.koi.science:4000/register/';
 
 
 router.post('/', (req, res) => {
@@ -33,7 +34,7 @@ router.post('/', (req, res) => {
                         res.send(err);
                     }
                     res.send({
-                        url: map.activationCode
+                        url: registerURL + map.activationCode
                     });
                 });
             });
@@ -54,7 +55,7 @@ router.post('/', (req, res) => {
                 }
 
                 res.send({
-                    url: map.activationCode
+                    url: registerURL + map.activationCode
                 });
             });
         }
