@@ -29,11 +29,9 @@ app.use('/temperature', temperature);
 app.use('/incubator', incubator);
 
 
-// catch 404 and forward to error handler
+// send bundle anyway
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    res.sendFile(path.join(__dirname,  './client/build/index.html'));
 });
 
 // error handler

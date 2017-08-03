@@ -46,7 +46,8 @@ router.post('/', (req, res) => {
                 deviceId: deviceId,
                 deviceKey: rand.generateKey(10),
                 activationCode: rand.generateKey(3),
-                timeStamp: new Date().valueOf()
+                timeStamp: new Date().valueOf(),
+                isActive: false
             });
 
             map.save(function(err, map, affected) {

@@ -19,19 +19,16 @@ router.get('/register/:id', function(req, res, next) {
             return;
         }
 
-        if (!data) {
-            res.send('Invalid activation code error', 404);
-        }
-
         // send 404 in expired code case
-        if ( new Date().valueOf() - data.timeStamp > CONSTANTS.EXPIRATION_PERIOD) {
+        if (!data || (new Date().valueOf() - data.timeStamp > CONSTANTS.EXPIRATION_PERIOD) ) {
             res.send('Activation code expired error', 404);
             return;
         }
 
         //redirect in valid code case
+        console.log(data);
         res.writeHead(302, {
-            'Location': '/'
+            'Location': '/incubator/' + data.deviceKey
         });
         res.end();
 
